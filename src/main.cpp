@@ -2,9 +2,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-using namespace std; 
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+void framebuffer_size_callback(GLFWwindow* window, const int width, const int height)
 {
     glViewport(0, 0, width, height);
 }
@@ -13,7 +11,7 @@ int main()
 {
     if (!glfwInit())
     {
-        cout << "Failed to initialize GLFW" << endl;
+        std::cout << "Failed to initialize GLFW\n";
         return -1;
     }
 
@@ -22,18 +20,17 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window;
-    window = glfwCreateWindow(800, 600, "Hello World!", NULL, NULL);
-    if (window == NULL)
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Hello OpenGL!", nullptr, nullptr);
+    if (window == nullptr)
     {
-        cout << "Failed to open GLFW window" << endl;
+        std::cout << "Failed to open GLFW window\n";
         return -1;
     }
     glfwMakeContextCurrent(window);
 
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress)))
     {
-        cout << "Failed to initialize GLAD" << endl;
+        std::cout << "Failed to initialize GLAD\n";
         return -1;
     }
 
